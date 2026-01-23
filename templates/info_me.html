@@ -1,0 +1,15 @@
+{% extends "base.html"%}
+{% block content %}
+<div class="jumbotron">
+    <p>Let's see if your username passed the requirements:</p>
+    {% if missing_conditions == [] %}
+      <p>All requirements satisfied!</p>
+    {% else %}
+      <ul>
+        {% for cond in missing_conditions %}
+          <li>{{cond}}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}  
+</div>
+{% endblock %}

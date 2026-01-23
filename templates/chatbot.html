@@ -1,0 +1,58 @@
+{% extends "base.html"%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iraqi Law Chatbot</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #chat-window { height: 400px; overflow-y: auto; border: 1px solid #ddd; padding: 15px; background: #f8f9fa; }
+        .msg { margin-bottom: 10px; padding: 8px 12px; border-radius: 15px; max-width: 80%; }
+        .user-msg { background: #007bff; color: white; align-self: flex-end; margin-left: auto; }
+        .bot-msg { background: #e9ecef; color: #333; align-self: flex-start; }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="card mx-auto" style="max-width: 600px;">
+            <div class="card-header bg-primary text-white text-center">Iraqi Law Assistant</div>
+            <div class="card-body d-flex flex-column" id="chat-window">
+                </div>
+            <div class="card-footer">
+                <div class="input-group">
+                    <input type="text" id="user-input" class="form-control" placeholder="Ask about a law...">
+                    <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const chatWindow = document.getElementById('chat-window');
+            if (!input.value.trim()) return;
+
+            // 1. Show user message
+            chatWindow.innerHTML += `<div class="msg user-msg">${input.value}</div>`;
+            const userText = input.value;
+            input.value = '';
+
+            // 2. Send to Flask
+            const response = await fetch('/ask', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: userText })
+            });
+            const data = await response.json();
+
+            // 3. Show bot response
+            chatWindow.innerHTML += `<div class="msg bot-msg">${data.answer}</div>`;
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+    </script>
+</body>
+</html>
+{% endblock %}
