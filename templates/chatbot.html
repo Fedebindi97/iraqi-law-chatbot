@@ -53,6 +53,42 @@
             chatWindow.scrollTop = chatWindow.scrollHeight;
         }
     </script>
+
+<button class="btn btn-outline-danger btn-sm" id="reset-btn" onclick="resetChat()">
+    <span id="reset-text">New Chat</span>
+    <span id="reset-spinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+</button>
+
+<script>
+    async function resetChat() {
+        if (!confirm("Are you sure you want to clear the conversation?")) return;
+
+        const btn = document.getElementById('reset-btn');
+        const spinner = document.getElementById('reset-spinner');
+        const text = document.getElementById('reset-text');
+        const chatBox = document.getElementById('chat-window');
+
+        // Show loading state
+        btn.disabled = true;
+        spinner.classList.remove('d-none');
+        text.classList.add('d-none');
+
+        try {
+            const response = await fetch('/reset', { method: 'POST' });
+            if (response.ok) {
+                // Clear the visual chat box
+                chatBox.innerHTML = '<div class="msg bot-msg">Chat reset. How can I help you?</div>';
+            }
+        } catch (error) {
+            console.error("Failed to reset:", error);
+        } finally {
+            // Reset button state
+            btn.disabled = false;
+            spinner.classList.add('d-none');
+            text.classList.remove('d-none');
+        }
+    }
+</script>
 </body>
 </html>
 {% endblock %}
