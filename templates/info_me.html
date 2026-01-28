@@ -1,15 +1,21 @@
 {% extends "base.html"%}
 {% block content %}
-<div class="jumbotron">
-    <p>Let's see if your username passed the requirements:</p>
-    {% if missing_conditions == [] %}
-      <p>All requirements satisfied!</p>
-    {% else %}
-      <ul>
-        {% for cond in missing_conditions %}
-          <li>{{cond}}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}  
-</div>
+<section class="info-container">
+    <div class="info-image">
+        <img src="{{ url_for('static', filename='images/author.png') }}" alt="Iraqi Law Project">
+    </div>
+
+    <div class="info-text">
+        <h2>About me</h2>
+        <p>
+            I am a "democracy data mercenary": I help organizations defend and expand human rights
+            and democracy through data science and technology. I have worked with NGOs in Ukraine
+            and Iraqi Kurdistan, and fell in love with both places!
+        </p>
+        <p>
+            You can contact me at <a href="mailto:bindi.federico@gmail.com">bindi.federico@gmail.com</a> or follow me on
+            <a href="https://www.linkedin.com/in/federicobindi/">LinkedIn</a>.
+        </p>
+    </div>
+</section>
 {% endblock %}

@@ -8,7 +8,9 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="{{url_for('index')}}">Home Page</a>
+      <a class="navbar-brand" href="{{url_for('index')}}">Chatbot</a>
+      <a class="navbar-brand" href="{{url_for('info_project')}}">About the project</a>
+      <a class="navbar-brand" href="{{url_for('info_me')}}">About the author</a>
     </nav>
     {% block content %}
     {% endblock %}
