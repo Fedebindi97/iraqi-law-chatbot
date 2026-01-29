@@ -1,20 +1,38 @@
 {% extends "base.html"%}
 {% block content %}
-<section class="info-container">
-    <div class="info-image">
-        <img src="{{ url_for('static', filename='images/iraq_democracy.png') }}" alt="Iraqi Law Project">
+<section class="container info-container my-5">
+    <div class="row align-items-center"> <div class="col-md-5">
+        <img src="{{ url_for('static', filename='images/iraq_democracy.webp') }}" class="img-fluid rounded" alt="Man with Iraqi flag">
     </div>
 
-    <div class="info-text">
-        <h2>About me</h2>
+    <div class="col-md-7" style="max-width: 800px; text-align: justify;">
+        
+        <h2 class="text-center mb-4">
+            About the project
+        </h2>
+        
         <p>
-            I am a "democracy data mercenary": I help organizations defend and expand human rights
-            and democracy through data science and technology. I have worked with NGOs in Ukraine
-            and Iraqi Kurdistan, and fell in love with both places!
+            Liberal democracies are built on the rule of law, among other things. Legislation enforces
+            and protects citizens' rights, and ensures that governments' powers are limiteed and its
+            actions are properly scrutinized. However, modern nation states have enormous legal corpuses,
+            making it very difficult for the common citizen to oversee and understand fully. This chatbot
+            is aimed at helping Iraqi citizens and NGOs easily access, in a conversational setting, the 
+            Iraqi law corpus and ask questions about it.
         </p>
         <p>
-            You can contact me at <a href="mailto:bindi.federico@gmail.com">bindi.federico@gmail.com</a> or follow me on
-            <a href="https://www.linkedin.com/in/federicobindi/">LinkedIn</a>.
+            The chatbot is based on <a href="https://en.wikipedia.org/wiki/Retrieval-augmented_generation">Retrieval Augmented Generation</a>,
+            a technique that allows LLM to parse large corpuses of documents and retrieve only the relevant
+            ones based on a specific user query. This techniques allows LLM to expand their knowledge 
+            (as, most likely, Iraqi legislation was not a prevalent source in the original training of modern
+            LLMs) and provide accurate answers without hallucinating.
+        </p>
+        <p>
+            The LLM used in this project is Gemini 2.5 Flash (free tier - I'm a volunteer, be considerate with the amount of queries!).
+            Law embeddings were created using the <a href="https://arxiv.org/pdf/2402.03216">BGE-M3</a> by <a href="https://www.baai.ac.cn/">BAAI</a>.
+            sentence transformer; embedding vectors are stored and retrieved using <a href="https://qdrant.tech/">Qdrant</a>.
+            The web app is built using <a href="https://flask.palletsprojects.com/en/stable/">Flask</a>
+            and styled with <a href="https://getbootstrap.com/">Bootstrap 5</a>. (This <a href="udemy.com/course/python-and-flask-bootcamp-create-websites-using-flask/">Udemy course</a>
+            was very helpful to get started with Flask!)
         </p>
     </div>
 </section>

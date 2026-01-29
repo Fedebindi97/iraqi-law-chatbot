@@ -1,12 +1,12 @@
 {% extends "base.html"%}
 {% block content %}
-<section class="info-container">
-    <div class="info-image">
-        <img src="{{ url_for('static', filename='images/author.png') }}" alt="Iraqi Law Project">
+<section class="container info-container my-5">
+    <div class="row align-items-center"> <div class="col-md-5">
+        <img src="{{ url_for('static', filename='images/author.png') }}" class="img-fluid rounded" alt="Yours truly">
     </div>
 
-    <div class="info-text">
-        <h2>About me</h2>
+    <div class="col-md-7" style="max-width: 800px; text-align: justify;">
+        <h2 class="text-center mb-4">About me</h2>
         <p>
             I am a "democracy data mercenary": I help organizations defend and expand human rights
             and democracy through data science and technology. I have worked with NGOs in Ukraine

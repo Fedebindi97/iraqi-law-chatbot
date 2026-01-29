@@ -53,7 +53,7 @@ def get_llm_response(user_query,
         contents=full_messages,
         config={
             "system_instruction": system_instruction,
-            "temperature": 0.3, # Lower temperature = more factual for law
+            "temperature": 0.5, # Lower temperature = more factual for law
         }
     )
     

@@ -7,10 +7,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="{{url_for('index')}}">Chatbot</a>
-      <a class="navbar-brand" href="{{url_for('info_project')}}">About the project</a>
-      <a class="navbar-brand" href="{{url_for('info_me')}}">About the author</a>
+    <nav class="navbar navbar-expand-lg navbar-primary bg-primary">
+      <div class="container">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto align-items-center"> 
+            <li class="nav-item active">
+              <a class="nav-link text-white fs-3" href="{{url_for('index')}}">Chatbot</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link text-white" href="{{url_for('info_project')}}">About the project</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link text-white" href="{{url_for('info_me')}}">About the author</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
     {% block content %}
     {% endblock %}
