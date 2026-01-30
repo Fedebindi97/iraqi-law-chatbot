@@ -12,13 +12,43 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
           <ul class="navbar-nav mx-auto align-items-center"> 
             <li class="nav-item active">
-              <a class="nav-link text-white fs-3" href="{{url_for('index')}}">Chatbot</a>
+              <a class="nav-link text-white fs-3" href="{{url_for('index')}}">
+                {% if session.get('language') == 'ar' %}
+                 روبوت الدردشة
+                {% else %}
+                  Chatbot
+                {% endif %}
+              </a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link text-white" href="{{url_for('info_project')}}">About the project</a>
+              <a class="nav-link text-white" href="{{url_for('info_project')}}">
+                {% if session.get('language') == 'ar' %}
+                 عن المشروع
+                {% else %}
+                  About the project
+                {% endif %}
+              </a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link text-white" href="{{url_for('info_me')}}">About the author</a>
+              <a class="nav-link text-white" href="{{url_for('info_me')}}">
+                {% if session.get('language') == 'ar' %}
+                 عن المؤلف
+                {% else %}
+                  About the author
+                {% endif %}
+              </a>
+            </li>
+            <li>
+              <div class="btn-group border rounded" style="overflow: hidden;">
+                <a href="{{ url_for('set_language', lang='en') }}" 
+                  class="btn btn-sm {{ 'btn-primary' if session.get('language') != 'ar' else 'btn-outline-primary' }} border-0">
+                  EN
+                </a>
+                <a href="{{ url_for('set_language', lang='ar') }}" 
+                  class="btn btn-sm {{ 'btn-primary' if session.get('language') == 'ar' else 'btn-outline-primary' }} border-0">
+                  AR
+                </a>
+              </div>
             </li>
           </ul>
         </div>
@@ -26,5 +56,5 @@
     </nav>
     {% block content %}
     {% endblock %}
-  </body>
+    <p style="text-align: center; margin-top: 40px;"><i>© 2026 KOHRW. All rights reserved.</i></p>  </body>
 </html>

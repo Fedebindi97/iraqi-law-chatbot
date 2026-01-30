@@ -144,13 +144,14 @@ gmpy2 @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/croot-mu
 google==3.0.0
 google-api-core==2.11.1
 google-api-python-client==2.137.0
-google-auth==2.43.0
+google-auth==2.48.0
 google-auth-httplib2==0.2.0
 google-auth-oauthlib==1.2.1
 google-cloud==0.34.0
 google-cloud-core==2.3.3
 google-cloud-storage==2.10.0
 google-crc32c==1.5.0
+google-genai==1.60.0
 google-pasta==0.2.0
 google-resumable-media==2.5.0
 googleapis-common-protos==1.72.0
@@ -337,6 +338,7 @@ pluggy @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_cro
 ply==3.11
 pmdarima==2.0.3
 pooch @ file:///tmp/build/80754af9/pooch_1623324770023/work
+portalocker==3.2.0
 posthog==5.4.0
 powerlaw==1.5
 poyo @ file:///tmp/build/80754af9/poyo_1617751526755/work
@@ -398,7 +400,7 @@ PySocks @ file:///Users/ktietz/ci_310/pysocks_1643961536721/work
 pystan @ git+https://github.com/stan-dev/pystan2.git@1dd043db3c2618a9360a0f2ccbb57221634e5b08
 pytest==7.1.2
 python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
-python-dotenv==1.1.1
+python-dotenv==1.2.1
 python-igraph==0.10.6
 python-Levenshtein==0.21.1
 python-louvain==0.16
@@ -420,6 +422,7 @@ PyYAML @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_8dd
 pyzmq @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_8599562e-e9e5-443b-91db-7f7c0ba6aad3mrdoyvz4/croots/recipe/pyzmq_1657724196154/work
 QDarkStyle @ file:///tmp/build/80754af9/qdarkstyle_1617386714626/work
 qdldl==0.1.7.post4
+qdrant-client==1.16.2
 qstylizer @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_89jt0xlnxz/croot/qstylizer_1674008531745/work/dist/qstylizer-0.2.2-py2.py3-none-any.whl
 QtAwesome @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_204g337__t/croot/qtawesome_1674008697341/work
 qtconsole @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_17u9pzjaj7/croot/qtconsole_1674008447244/work
@@ -555,7 +558,7 @@ wcwidth @ file:///Users/ktietz/demo/mc3/conda-bld/wcwidth_1629357192024/work
 webdriver-manager==4.0.2
 webencodings==0.5.1
 websocket-client==1.9.0
-websockets==11.0.3
+websockets==15.0.1
 Werkzeug @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_54t7yp6vfo/croot/werkzeug_1671215998207/work
 whatthepatch @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_fb6zrbk5ws/croots/recipe/whatthepatch_1661795996299/work
 widgetsnbextension==4.0.7

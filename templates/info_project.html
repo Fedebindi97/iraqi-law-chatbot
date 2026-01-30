@@ -11,29 +11,74 @@
             About the project
         </h2>
         
-        <p>
-            Liberal democracies are built on the rule of law, among other things. Legislation enforces
-            and protects citizens' rights, and ensures that governments' powers are limiteed and its
-            actions are properly scrutinized. However, modern nation states have enormous legal corpuses,
-            making it very difficult for the common citizen to oversee and understand fully. This chatbot
-            is aimed at helping Iraqi citizens and NGOs easily access, in a conversational setting, the 
-            Iraqi law corpus and ask questions about it.
-        </p>
-        <p>
-            The chatbot is based on <a href="https://en.wikipedia.org/wiki/Retrieval-augmented_generation">Retrieval Augmented Generation</a>,
-            a technique that allows LLM to parse large corpuses of documents and retrieve only the relevant
-            ones based on a specific user query. This techniques allows LLM to expand their knowledge 
-            (as, most likely, Iraqi legislation was not a prevalent source in the original training of modern
-            LLMs) and provide accurate answers without hallucinating.
-        </p>
-        <p>
-            The LLM used in this project is Gemini 2.5 Flash (free tier - I'm a volunteer, be considerate with the amount of queries!).
-            Law embeddings were created using the <a href="https://arxiv.org/pdf/2402.03216">BGE-M3</a> by <a href="https://www.baai.ac.cn/">BAAI</a>.
-            sentence transformer; embedding vectors are stored and retrieved using <a href="https://qdrant.tech/">Qdrant</a>.
-            The web app is built using <a href="https://flask.palletsprojects.com/en/stable/">Flask</a>
-            and styled with <a href="https://getbootstrap.com/">Bootstrap 5</a>. (This <a href="udemy.com/course/python-and-flask-bootcamp-create-websites-using-flask/">Udemy course</a>
-            was very helpful to get started with Flask!)
-        </p>
+        {% if language == 'en' %}
+            <p>
+                Liberal democracies are built on the rule of law, among other things. Legislation enforces
+                and protects citizens' rights, and ensures that governments' powers are limiteed and its
+                actions are properly scrutinized. However, modern nation states have enormous legal corpuses,
+                making it very difficult for the common citizen to oversee and understand fully. This chatbot
+                is aimed at helping Iraqi citizens and NGOs easily access, in a conversational setting, the 
+                Iraqi law corpus and ask questions about it.
+            </p>
+            <p>
+                The chatbot is based on <a href="https://en.wikipedia.org/wiki/Retrieval-augmented_generation">Retrieval Augmented Generation</a>,
+                a technique that allows LLM to parse large corpuses of documents and retrieve only the relevant
+                ones based on a specific user query. This techniques allows LLM to expand their knowledge 
+                (as, most likely, Iraqi legislation was not a prevalent source in the original training of modern
+                LLMs) and provide accurate answers without hallucinating.
+            </p>
+            <p>
+                The LLM used in this project is Gemini 2.5 Flash (free tier - I'm a volunteer, be considerate with the amount of queries!).
+                Law embeddings were created using the <a href="https://arxiv.org/pdf/2402.03216">BGE-M3</a> by <a href="https://www.baai.ac.cn/">BAAI</a>.
+                sentence transformer; embedding vectors are stored and retrieved using <a href="https://qdrant.tech/">Qdrant</a>.
+                The web app is built using <a href="https://flask.palletsprojects.com/en/stable/">Flask</a>
+                and styled with <a href="https://getbootstrap.com/">Bootstrap 5</a>. (This <a href="udemy.com/course/python-and-flask-bootcamp-create-websites-using-flask/">Udemy course</a>
+                was very helpful to get started with Flask!)
+            </p>
+        {% else %}
+            <p>
+                تُبنى الديمقراطيات الليبرالية، من بين أمور أخرى، على سيادة القانون. فالقانون يُفعّل
+
+                ويحمي حقوق المواطنين، ويضمن تقييد سلطات الحكومات
+
+                وخضوع أعمالها
+
+
+                للتدقيق اللازم. ومع ذلك، تمتلك الدول القومية الحديثة مجموعات قانونية ضخمة،
+
+
+                مما يجعل من الصعب للغاية على المواطن العادي الإلمام بها وفهمها فهمًا كاملًا. يهدف هذا البرنامج الآلي للدردشة
+
+
+                إلى مساعدة المواطنين العراقيين والمنظمات غير الحكومية على الوصول بسهولة، في سياق حواري، إلى
+
+
+                مجموعة القوانين العراقية وطرح الأسئلة عنها.
+            </p>
+            <p>
+                يعتمد برنامج الدردشة الآلي على تقنية <a href="https://en.wikipedia.org/wiki/Retrieval-augmented_generation">الاسترجاع المعزز بالتوليد</a>،
+
+                وهي تقنية تُمكّن طلاب القانون من تحليل مجموعات كبيرة من الوثائق واسترجاع الوثائق ذات الصلة فقط
+
+                بناءً على استعلام محدد من المستخدم. تُمكّن هذه التقنية طلاب القانون من توسيع معارفهم
+
+                إذ من المرجح أن التشريعات العراقية لم تكن مصدرًا رئيسيًا في التدريب الأولي لطلاب القانون المعاصرين
+
+                وتقديم إجابات دقيقة دون أي تخمينات.
+            </p>
+            <p>
+                يستخدم هذا المشروع مكتبة Gemini 2.5 Flash (نسخة مجانية - أنا متطوع، لذا يُرجى مراعاة عدد الاستعلامات!).
+                تم إنشاء تضمينات القانون باستخدام <a href="https://arxiv.org/pdf/2402.03216">BGE-M3</a> من <a href="https://www.baai.ac.cn/">BAAI</a>.
+
+                يتم تخزين متجهات التضمين واسترجاعها باستخدام <a href="https://qdrant.tech/">Qdrant</a>.
+
+                تم بناء تطبيق الويب باستخدام <a href="https://flask.palletsprojects.com/en/stable/">Flask</a>
+
+                وتم تصميمه باستخدام <a href="https://getbootstrap.com/">Bootstrap 5</a>. (كانت دورة Udemy هذه <a href="udemy.com/course/python-and-flask-bootcamp-create-websites-using-flask/">موقع Udemy</a>
+
+                مفيدة جدًا للبدء باستخدام Flask!)
+            </p>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

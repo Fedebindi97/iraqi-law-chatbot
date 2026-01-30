@@ -1,38 +1,54 @@
 # Set up your imports and your flask app.
-from flask import Flask, render_template, request, jsonify, session, redirect
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from sentence_transformers import SentenceTransformer
 from qdrant_client import QdrantClient
 from chatbot_functions import *
 from google import genai
+import os
+from dotenv import load_dotenv
 
-GEMINI_API_KEY = "AIzaSyCTlCxD-HwRKUNKMvyJOqVEQtzxmQk6EJk"
-QDRANT_URL = "https://fc237fd3-4cd9-4a72-91a4-153b5c17a170.europe-west3-0.gcp.cloud.qdrant.io:6333"
-QDRANT_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.cXFgmSC0KFc-lZFB6Kb_YIY252x0a5stGT5R-RWTOY8"
+load_dotenv()
 
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+QDRANT_URL = os.getenv("QDRANT_URL")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
+    
 app = Flask(__name__)
-app.secret_key = b'_5#yf23543d2LF4Qsgfh5hh58z\n\xec]/'
+app.secret_key = os.getenv("APP_SECRET_KEY")
 embed_model = SentenceTransformer('BAAI/bge-m3', device='mps') # use 'cpu' if no Mac GPU
 
 qdrant_client = QdrantClient(
     url=QDRANT_URL, 
     api_key=QDRANT_API_KEY,
 )
-collection = "iraqi_laws_en"
 
 gemini_client = genai.Client(api_key=GEMINI_API_KEY)
 
 
 @app.route('/')
 def index():
-    session.clear()
-    return render_template('chatbot.html')
+    # Clear chatbot variables at the start of a new session
+    session['history'] = []
+    session['chat_context'] = ''
+    session.modified = True
+    return render_template('chatbot.html', language=session.get('language', 'en'))
 
 @app.route('/reset', methods=['POST'])
 def reset_chat():
-    # Clear all session data (history)
-    session.clear()
+    # Clear chatbot variables at the start of a new session
+    session['history'] = []
+    session['chat_context'] = ''
+    session.modified = True
     # Return a success status to the JavaScript caller
     return jsonify({"status": "success", "message": "Chat history cleared."})
+
+@app.route('/set_language/<lang>')
+def set_language(lang):
+    if lang in ['en', 'ar']:
+        session['language'] = lang
+    
+    # Redirect back to the previous page, or home if referrer is missing
+    return redirect(request.referrer or url_for('index'))
 
 @app.route('/ask', methods=['POST'])
 def ask():
@@ -44,7 +60,7 @@ def ask():
         chat_context = retrieve_law_chunks(user_input,
                                            embed_model,
                                            qdrant_client,
-                                           collection) # we only retrieve context once when history is empty
+                                           collection = "iraqi_laws_en" if session.get('language', 'en') == 'en' else "iraqi_laws_ar") # we only retrieve context once when history is empty
     
     bot_answer = get_llm_response(user_input, chat_context, history, gemini_client)
 
@@ -63,7 +79,7 @@ def ask():
 def info_project():
 
     # Return the information to the report page html.
-    return render_template('info_project.html')
+    return render_template('info_project.html', language=session.get('language', 'en'))
 
 
 # This page will be the page after the form
@@ -71,7 +87,7 @@ def info_project():
 def info_me():
 
     # Return the information to the report page html.
-    return render_template('info_me.html')
+    return render_template('info_me.html', language=session.get('language', 'en'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

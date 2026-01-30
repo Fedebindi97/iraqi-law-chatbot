@@ -7,15 +7,27 @@
 
     <div class="col-md-7" style="max-width: 800px; text-align: justify;">
         <h2 class="text-center mb-4">About me</h2>
-        <p>
-            I am a "democracy data mercenary": I help organizations defend and expand human rights
-            and democracy through data science and technology. I have worked with NGOs in Ukraine
-            and Iraqi Kurdistan, and fell in love with both places!
-        </p>
-        <p>
-            You can contact me at <a href="mailto:bindi.federico@gmail.com">bindi.federico@gmail.com</a> or follow me on
-            <a href="https://www.linkedin.com/in/federicobindi/">LinkedIn</a>.
-        </p>
+        {% if language == 'en' %}
+            <p>
+                I am a "democracy data mercenary": I help organizations defend and expand human rights
+                and democracy through data science and technology. I have worked with NGOs in Ukraine
+                and Iraqi Kurdistan, and fell in love with both places!
+            </p>
+            <p>
+                You can contact me at <a href="mailto:bindi.federico@gmail.com">bindi.federico@gmail.com</a> or follow me on
+                <a href="https://www.linkedin.com/in/federicobindi/">LinkedIn</a>.
+            </p>
+        {% else %}
+            <p>
+                أنا "خبير بيانات في مجال الديمقراطية": أساعد المنظمات على الدفاع عن حقوق الإنسان وتعزيز الديمقراطية
+                من خلال علم البيانات والتكنولوجيا. عملتُ مع منظمات غير حكومية في أوكرانيا
+                وكردستان العراق، وأحببتُ كلا المكانين!
+            </p>
+            <p>
+                يمكنك الاتصال بي على <a href="mailto:bindi.federico@gmail.com">bindi.federico@gmail.com</a> أو متابعتي على
+                <a href="https://www.linkedin.com/in/federicobindi/">لينكدإن</a>.
+            </p>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

@@ -16,14 +16,36 @@
 <body class="bg-light">
     <div class="container py-5">
         <div class="card mx-auto" style="max-width: 900px;">
-            <div class="card-header bg-primary text-white text-center">Iraqi Law Assistant</div>
+            <div class="card-header bg-primary text-white text-center">
+                {% if language == 'en' %}
+                    Iraqi Law Assistant
+                {% else %}
+                    مساعد القانون العراقي
+                {% endif %}
+            </div>
             <div class="card-body d-flex flex-column" id="chat-window">
                 </div>
             <div class="card-footer">
                 <div class="input-group">
-                    <button class="btn btn-outline-danger btn-sm" id="reset-btn" onclick="resetChat()">New Chat</button>
-                    <input type="text" id="user-input" class="form-control" placeholder="Ask about a law...">
-                    <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+                    <button class="btn btn-outline-danger btn-sm" id="reset-btn" onclick="resetChat()">
+                        {% if language == 'en' %}
+                            New Chat
+                        {% else %}
+                            محادثة جديدة
+                        {% endif %}
+                    </button>
+                    {% if language == 'en' %}
+                        <input type="text" id="user-input" class="form-control" placeholder="Ask about a law...">
+                    {% else %}
+                        <input type="text" id="user-input" class="form-control" placeholder="اسأل عن قانون...">
+                    {% endif %}
+                    <button class="btn btn-primary" onclick="sendMessage()">
+                        {% if language == 'en' %}
+                            Send
+                        {% else %}
+                            إرسال
+                        {% endif %}
+                    </button>
                 </div>
             </div>
         </div>
@@ -86,11 +108,19 @@
 </script>
 <div class="container mx-auto" style="max-width: 900px; text-align: justify;">
     <p>
-        In order to chat with the Iraqi Law Chatbot, please enter your questions or topics related to Iraqi
-        law in the input box above and click "Send". The chatbot will respond with relevant information
-        based on its knowledge of Iraqi legal matters. Clicking "New Chat" or refreshing the page will
-        restart the chatbot session, with any previous conversation history cleared. The chatbot can only
-        fetch information about laws of Federal Iraq enacted since 2005 (latest constitutional period).
+        {% if language == 'en' %}
+            In order to chat with the Iraqi Law Chatbot, please enter your questions or topics related to Iraqi
+            law in the input box above and click "Send". The chatbot will respond with relevant information
+            based on its knowledge of Iraqi legal matters. Clicking "New Chat" or refreshing the page will
+            restart the chatbot session, with any previous conversation history cleared. The chatbot can only
+            fetch information about laws of Federal Iraq enacted since 2005 (latest constitutional period).
+        {% else %}
+            من أجل الدردشة مع برنامج الدردشة الآلي للقانون العراقي، يرجى إدخال أسئلتك أو المواضيع المتعلقة بالقانون العراقي
+            في مربع الإدخال أعلاه والنقر على "إرسال". سيستجيب برنامج الدردشة الآلي بمعلومات ذات صلة
+            بناءً على معرفته بالشؤون القانونية العراقية. النقر على "محادثة جديدة" أو تحديث الصفحة سيؤدي إلى
+            إعادة تشغيل جلسة برنامج الدردشة الآلي، مع مسح أي سجل محادثة سابق. يمكن لبرنامج الدردشة الآلي فقط
+            جلب المعلومات حول قوانين العراق الاتحادي التي تم سنها منذ عام 2005 (الفترة الدستورية الأخيرة).
+        {% endif %}
     </p>
 </div>
 </body>
