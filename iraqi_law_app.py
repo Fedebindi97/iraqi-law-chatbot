@@ -90,4 +90,4 @@ def info_me():
     return render_template('info_me.html', language=session.get('language', 'en'))
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
