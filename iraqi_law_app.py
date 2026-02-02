@@ -1,6 +1,7 @@
 # Set up your imports and your flask app.
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from sentence_transformers import SentenceTransformer
+import torch
 from qdrant_client import QdrantClient
 from chatbot_functions import *
 from google import genai
@@ -15,7 +16,14 @@ QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
     
 app = Flask(__name__)
 app.secret_key = os.getenv("APP_SECRET_KEY")
-embed_model = SentenceTransformer('BAAI/bge-m3', device='mps') # use 'cpu' if no Mac GPU
+if torch.backends.mps.is_available():
+    device = "mps"
+elif torch.cuda.is_available():
+    device = "cuda"
+else:
+    device = "cpu"
+#embed_model = SentenceTransformer('BAAI/bge-m3', device='mps') # use 'cpu' if no Mac GPU
+embed_model = SentenceTransformer('all-MiniLM-L6-v2', device=device)
 
 qdrant_client = QdrantClient(
     url=QDRANT_URL, 
