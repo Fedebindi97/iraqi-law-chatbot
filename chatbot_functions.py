@@ -1,17 +1,21 @@
 def retrieve_law_chunks(user_question,
-                        embed_model,
+                        gemini_client,
                         qdrant_client,
                         collection):
-    # STEP A: Embed the question
-    query_vector = embed_model.encode(user_question).tolist()
+    # STEP A: Use Google's API to get the embedding
+    # This replaces 'embed_model.encode'
+    result = gemini_client.models.embed_content(
+        model="text-embedding-004",
+        contents=user_question
+    )
+    query_vector = result.embeddings[0].values
     
-    # STEP B: Retrieve relevant law chunks
+    # STEP B: Query Qdrant (Same as before)
     results = qdrant_client.query_points(
         collection_name=collection,
         query=query_vector,
         limit=4
     ).points
-    
     return "\n\n".join([point.payload['page_content'] for point in results])
 
 def get_llm_response(user_query,

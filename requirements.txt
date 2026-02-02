@@ -2,6 +2,5 @@ Flask
 gunicorn
 python-dotenv
 requests
-sentence-transformers
 qdrant-client
 google-genai
