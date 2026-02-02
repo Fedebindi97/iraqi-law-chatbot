@@ -1,6 +1,5 @@
 # Set up your imports and your flask app.
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
-import torch
 from qdrant_client import QdrantClient
 from chatbot_functions import *
 from google import genai
