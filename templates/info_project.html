@@ -2,7 +2,7 @@
 {% block content %}
 <section class="container info-container my-5">
     <div class="row align-items-center"> <div class="col-md-5">
-        <img src="{{ url_for('static', filename='images/iraq_democracy.webp') }}" class="img-fluid rounded" alt="Man with Iraqi flag">
+        <img src="{{ url_for('static', filename='images/tishreen.webp') }}" class="img-fluid rounded" alt="Man with Iraqi flag">
     </div>
 
     <div class="col-md-7" style="max-width: 800px; text-align: justify;">
@@ -22,13 +22,13 @@
             </p>
             <p>
                 The chatbot is based on <a href="https://en.wikipedia.org/wiki/Retrieval-augmented_generation">Retrieval Augmented Generation</a>,
-                a technique that allows LLM to parse large corpuses of documents and retrieve only the relevant
-                ones based on a specific user query. This techniques allows LLM to expand their knowledge 
+                a technique that allows LLMs to parse large corpuses of documents and retrieve only the relevant
+                ones based on a specific user query. This techniques allows LLMs to expand their knowledge 
                 (as, most likely, Iraqi legislation was not a prevalent source in the original training of modern
                 LLMs) and provide accurate answers without hallucinating.
             </p>
             <p>
-                The LLM used in this project is Gemini 2.5 Flash (free tier - I'm a volunteer, be considerate with the amount of queries!).
+                The LLM used in this project is Gemini 2.5 Flash (pay-as-you-go - I'm a volunteer, be considerate with the amount of queries!).
                 Law embeddings were created using the <a href="https://arxiv.org/pdf/2402.03216">BGE-M3</a> by <a href="https://www.baai.ac.cn/">BAAI</a>.
                 sentence transformer; embedding vectors are stored and retrieved using <a href="https://qdrant.tech/">Qdrant</a>.
                 The web app is built using <a href="https://flask.palletsprojects.com/en/stable/">Flask</a>
@@ -38,44 +38,26 @@
         {% else %}
             <p>
                 تُبنى الديمقراطيات الليبرالية، من بين أمور أخرى، على سيادة القانون. فالقانون يُفعّل
-
                 ويحمي حقوق المواطنين، ويضمن تقييد سلطات الحكومات
-
                 وخضوع أعمالها
-
-
                 للتدقيق اللازم. ومع ذلك، تمتلك الدول القومية الحديثة مجموعات قانونية ضخمة،
-
-
                 مما يجعل من الصعب للغاية على المواطن العادي الإلمام بها وفهمها فهمًا كاملًا. يهدف هذا البرنامج الآلي للدردشة
-
-
                 إلى مساعدة المواطنين العراقيين والمنظمات غير الحكومية على الوصول بسهولة، في سياق حواري، إلى
-
-
                 مجموعة القوانين العراقية وطرح الأسئلة عنها.
             </p>
             <p>
                 يعتمد برنامج الدردشة الآلي على تقنية <a href="https://en.wikipedia.org/wiki/Retrieval-augmented_generation">الاسترجاع المعزز بالتوليد</a>،
-
                 وهي تقنية تُمكّن طلاب القانون من تحليل مجموعات كبيرة من الوثائق واسترجاع الوثائق ذات الصلة فقط
-
                 بناءً على استعلام محدد من المستخدم. تُمكّن هذه التقنية طلاب القانون من توسيع معارفهم
-
                 إذ من المرجح أن التشريعات العراقية لم تكن مصدرًا رئيسيًا في التدريب الأولي لطلاب القانون المعاصرين
-
                 وتقديم إجابات دقيقة دون أي تخمينات.
             </p>
             <p>
-                يستخدم هذا المشروع مكتبة Gemini 2.5 Flash (نسخة مجانية - أنا متطوع، لذا يُرجى مراعاة عدد الاستعلامات!).
+                يستخدم هذا المشروع مكتبة Gemini 2.5 Flash (الدفع حسب الاستخدام - أنا متطوع، لذا يرجى مراعاة عدد الاستفسارات!).
                 تم إنشاء تضمينات القانون باستخدام <a href="https://arxiv.org/pdf/2402.03216">BGE-M3</a> من <a href="https://www.baai.ac.cn/">BAAI</a>.
-
                 يتم تخزين متجهات التضمين واسترجاعها باستخدام <a href="https://qdrant.tech/">Qdrant</a>.
-
                 تم بناء تطبيق الويب باستخدام <a href="https://flask.palletsprojects.com/en/stable/">Flask</a>
-
                 وتم تصميمه باستخدام <a href="https://getbootstrap.com/">Bootstrap 5</a>. (كانت دورة Udemy هذه <a href="udemy.com/course/python-and-flask-bootcamp-create-websites-using-flask/">موقع Udemy</a>
-
                 مفيدة جدًا للبدء باستخدام Flask!)
             </p>
         {% endif %}

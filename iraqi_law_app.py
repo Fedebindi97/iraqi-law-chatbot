@@ -55,12 +55,21 @@ def ask():
     chat_context = session.get('chat_context', '')
     user_input = request.json.get('message')
     if chat_context == '':
-        chat_context = retrieve_law_chunks(user_input,
+        chat_context_uncurated = retrieve_law_chunks(user_input,
                                            gemini_client,
                                            qdrant_client,
-                                           collection = "iraqi_laws_en" if session.get('language', 'en') == 'en' else "iraqi_laws_ar") # we only retrieve context once when history is empty
+                                           collection = "iraqi_laws_en_uncurated") # we only retrieve context once when history is empty
+        chat_context_curated = retrieve_law_chunks(user_input,
+                                           gemini_client,
+                                           qdrant_client,
+                                           collection = "iraqi_laws_en_curated")
+        chat_context = chat_context_uncurated + "\n\n" + chat_context_curated
     
-    bot_answer = get_llm_response(user_input, chat_context, history, gemini_client)
+    bot_answer = get_llm_response(user_input,
+                                  chat_context,
+                                  history,
+                                  gemini_client,
+                                  session.get('language','en'))
 
     history.append({"role": "user", "content": user_input})
     history.append({"role": "model", "content": bot_answer})
