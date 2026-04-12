@@ -107,21 +107,33 @@
     }
 </script>
 <div class="container mx-auto" style="max-width: 900px; text-align: justify;">
-    <p>
-        {% if language == 'en' %}
+    {% if language == 'en' %}
+        <p>
             In order to chat with the Iraqi Law Chatbot, please enter your questions or topics related to Iraqi
             law in the input box above and click "Send". The chatbot will respond with relevant information
             based on its knowledge of Iraqi legal matters. Clicking "New Chat" or refreshing the page will
-            restart the chatbot session, with any previous conversation history cleared. The chatbot can only
-            fetch information about laws of Federal Iraq enacted since 2005 (latest constitutional period).
-        {% else %}
-            من أجل الدردشة مع برنامج الدردشة الآلي للقانون العراقي، يرجى إدخال أسئلتك أو المواضيع المتعلقة بالقانون العراقي
-            في مربع الإدخال أعلاه والنقر على "إرسال". سيستجيب برنامج الدردشة الآلي بمعلومات ذات صلة
-            بناءً على معرفته بالشؤون القانونية العراقية. النقر على "محادثة جديدة" أو تحديث الصفحة سيؤدي إلى
-            إعادة تشغيل جلسة برنامج الدردشة الآلي، مع مسح أي سجل محادثة سابق. يمكن لبرنامج الدردشة الآلي فقط
-            جلب المعلومات حول قوانين العراق الاتحادي التي تم سنها منذ عام 2005 (الفترة الدستورية الأخيرة).
-        {% endif %}
-    </p>
+            restart the chatbot session, with any previous conversation history cleared.
+        </p>
+        <p>
+            The chatbot mostly focuses on laws of Federal Iraq enacted since 2005 (latest constitutional period),
+            and is meant to discuss their pro or anti-democracy and human rights stance. The knowledge
+            cutoff of the chatbot is February 2nd, 2026.
+        </p>
+    {% else %}
+        <p>
+            للتحدث مع روبوت الدردشة الخاص بالقانون العراقي، يُرجى إدخال أسئلتك أو مواضيعك المتعلقة بالقانون العراقي
+            في خانة الإدخال أعلاه، ثم النقر على "إرسال". سيرد الروبوت بمعلومات ذات صلة
+            بناءً على معرفته بالشؤون القانونية العراقية. سيؤدي النقر على "محادثة جديدة" أو تحديث الصفحة إلى
+
+            إعادة بدء جلسة الدردشة مع الروبوت، مع مسح سجل المحادثات السابقة.
+        </p>
+        <p>
+            يركز الروبوت بشكل أساسي على قوانين العراق الاتحادية الصادرة منذ عام 2005 (آخر فترة دستورية)،
+            ويهدف إلى مناقشة موقفها المؤيد أو المعارض للديمقراطية وحقوق الإنسان.
+
+            آخر تحديث لمعلومات الروبوت هو 2 فبراير 2026.
+        </p>
+    {% endif %}
 </div>
 </body>
 </html>
