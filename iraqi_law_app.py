@@ -58,7 +58,7 @@ def ask():
         chat_context_uncurated = retrieve_law_chunks(user_input,
                                            gemini_client,
                                            qdrant_client,
-                                           collection = "iraqi_laws_en_uncurated") # we only retrieve context once when history is empty
+                                           collection = "iraqi_laws_en_uncurated_extended") # we only retrieve context once when history is empty
         chat_context_curated = retrieve_law_chunks(user_input,
                                            gemini_client,
                                            qdrant_client,
