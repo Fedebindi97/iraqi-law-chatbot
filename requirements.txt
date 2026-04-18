@@ -4,3 +4,4 @@ python-dotenv
 requests
 qdrant-client
 google-genai
+google-cloud-discoveryengine
