@@ -1,26 +1,42 @@
 # Set up your imports and your flask app.
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
-from qdrant_client import QdrantClient
-from chatbot_functions import *
-from google import genai
+from chatbot import *
 import os
 from dotenv import load_dotenv
+from google.oauth2 import service_account
 
+# Load env vars
 load_dotenv()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 QDRANT_URL = os.getenv("QDRANT_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
-    
-app = Flask(__name__)
-app.secret_key = os.getenv("APP_SECRET_KEY")
-
-qdrant_client = QdrantClient(
-    url=QDRANT_URL, 
-    api_key=QDRANT_API_KEY,
+GCP_PROJECT_ID = os.getenv("GCP_PROJECT_ID")
+raw_gcp_key = os.getenv("GCP_PRIVATE_KEY", "")
+clean_gcp_key = raw_gcp_key.strip().strip('"').strip("'").replace('\\n', '\n')
+service_account_info = {
+    "project_id": GCP_PROJECT_ID,
+    "client_email": os.getenv("GCP_CLIENT_EMAIL"),
+    "private_key": clean_gcp_key, 
+    "type": "service_account",
+    "token_uri": "https://oauth2.googleapis.com/token",
+}
+scopes = ["https://www.googleapis.com/auth/cloud-platform"]
+GCP_CREDENTIALS = service_account.Credentials.from_service_account_info(
+    service_account_info, 
+    scopes=scopes
 )
 
-gemini_client = genai.Client(api_key=GEMINI_API_KEY)
+# Chatbot and app initialization
+app = Flask(__name__)
+app.secret_key = os.getenv("APP_SECRET_KEY")
+chatbot = Chatbot(
+    gcp_credentials=GCP_CREDENTIALS,
+    gemini_api_key=GEMINI_API_KEY,
+    qdrant_url=QDRANT_URL,
+    qdrant_api_key=QDRANT_API_KEY,
+    gcp_project_id=GCP_PROJECT_ID
+)
 
 
 @app.route('/')
@@ -55,20 +71,17 @@ def ask():
     chat_context = session.get('chat_context', '')
     user_input = request.json.get('message')
     if chat_context == '':
-        chat_context_uncurated = retrieve_law_chunks(user_input,
-                                           gemini_client,
-                                           qdrant_client,
-                                           collection = "iraqi_laws_en_uncurated_extended") # we only retrieve context once when history is empty
-        chat_context_curated = retrieve_law_chunks(user_input,
-                                           gemini_client,
-                                           qdrant_client,
-                                           collection = "iraqi_laws_en_curated")
+        chat_context_uncurated = chatbot.retrieve_law_chunks(user_input,
+                                           collection = "iraqi_laws_en_uncurated_extended",
+                                           n_docs=4) # we only retrieve context once when history is empty
+        chat_context_curated = chatbot.retrieve_law_chunks(user_input,
+                                           collection = "iraqi_laws_en_curated",
+                                           n_docs=2) # we retrieve less docs from the curated corpus (as it's smaller)
         chat_context = chat_context_uncurated + "\n\n" + chat_context_curated
     
-    bot_answer = get_llm_response(user_input,
+    bot_answer = chatbot.respond(user_input,
                                   chat_context,
                                   history,
-                                  gemini_client,
                                   session.get('language','en'))
 
     history.append({"role": "user", "content": user_input})
