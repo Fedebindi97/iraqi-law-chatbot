@@ -52,6 +52,13 @@
     </div>
 
     <script>
+        document.getElementById('user-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
         async function sendMessage() {
             const input = document.getElementById('user-input');
             const chatWindow = document.getElementById('chat-window');
@@ -78,31 +85,32 @@
 
 <script>
     async function resetChat() {
-        //if (!confirm("Are you sure you want to clear the conversation?")) return;
-
-        const btn = document.getElementById('reset-btn');
-        const spinner = document.getElementById('reset-spinner');
-        const text = document.getElementById('reset-text');
         const chatBox = document.getElementById('chat-window');
+        const btn = document.getElementById('reset-btn');
 
-        // Show loading state
+        // 1. DOM Wipe: This "cancels" the visual existence of the previous messages
+        chatBox.innerHTML = '';
+
+        // 2. Abort active network request: 
+        // This stops the bot from "replying" into the now-empty box
+        if (currentController) {
+            currentController.abort();
+        }
+
+        // 3. UI feedback
         btn.disabled = true;
-        spinner.classList.remove('d-none');
-        text.classList.add('d-none');
 
         try {
+            // Tell the server to wipe the backend session history
             const response = await fetch('/reset', { method: 'POST' });
+            
             if (response.ok) {
-                // Clear the visual chat box
-                chatBox.innerHTML = '<div class="msg bot-msg"></div>';
+                console.log("Session history cleared on server.");
             }
         } catch (error) {
-            console.error("Failed to reset:", error);
+            console.error("Network error during reset:", error);
         } finally {
-            // Reset button state
             btn.disabled = false;
-            spinner.classList.add('d-none');
-            text.classList.remove('d-none');
         }
     }
 </script>
